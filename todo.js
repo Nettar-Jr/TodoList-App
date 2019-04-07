@@ -13,34 +13,34 @@
 	deleteButton.innerText = "x";
 	deleteButton.className = "Remove";
 	 
-	 var inputValue = document.getElementById('input').value;
-	 var txt = document.createTextNode(inputValue);
-	 todoItem.appendChild(txt);
-	 todoItem.appendChild(Del);
-	 todoItem.insertBefore(box, txt);
+	var inputValue = document.getElementById('input').value;
+	var txt = document.createTextNode(inputValue);
+	todoItem.appendChild(txt);
+	todoItem.appendChild(Del);
+	todoItem.insertBefore(box, txt);
 	 
-	 if (inputValue === ''){
-		 alert ('please enter a task');
-	 }
-	 else {
-		 document.getElementById('list').appendChild(li);
-	 }
-     document.getElementById('input').value;
+	if (inputValue === ''){
+		alert ('please enter a task');
+	}
+	else {
+		document.getElementById('list').appendChild(li);
+	}
+    document.getElementById('input').value;
      
-	 // hide list when delete button is clicked
+	// hide list when delete button is clicked
 	 
-		 deleteButton.onclick = function(){
-			 todoItem.style.display = "none";
-		 }
+	deleteButton.onclick = function(){
+		todoItem.style.display = "none";
+	}
 		 
 	//checked box create line-through effect on list.
-		checkBox.onclick = function(){
-			if (todoItem.style.textDecoration === "line-through"){
-				todoItem.style.textDecoration = "none";
-			}
-			else {
-				todoItem.style.textDecoration = "line-through";
-			}
+	checkBox.onclick = function(){
+		if (todoItem.style.textDecoration === "line-through"){
+			todoItem.style.textDecoration = "none";
 		}
+		else {
+			todoItem.style.textDecoration = "line-through";
+		}
+	}
  
 }
