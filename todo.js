@@ -1,6 +1,8 @@
+function newTaskOnKeyPress(){
+    newTaskOnClick;
+}
 
-
- function newTask(){
+function newTaskOnClick (){
     
 //click add to create items and append to list
 
@@ -16,14 +18,14 @@
 	var inputValue = document.getElementById('input').value;
 	var txt = document.createTextNode(inputValue);
 	todoItem.appendChild(txt);
-	todoItem.appendChild(Del);
-	todoItem.insertBefore(box, txt);
+	todoItem.appendChild(deleteButton);
+	todoItem.insertBefore(checkBox, txt);
 	 
 	if (inputValue === ''){
 		alert ('please enter a task');
 	}
 	else {
-		document.getElementById('list').appendChild(li);
+		document.getElementById('list').appendChild(todoItem);
 	}
     document.getElementById('input').value;
      

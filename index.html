@@ -1,18 +1,19 @@
-!DOCtype html>
+<!DOCtype html>
+<html>
 	<head>
 		<title> My Todo List</title>
-		<link type="text/css" rel="stylesheet" href="todolist.css">
+		<link type="text/css" rel="stylesheet" href="todo.css">
 		<!-- <script type="text/javascript" src = "todolist.js"></script> -->
-		<script type="text/javascript" src = "todolist2.js"></script>
+		<script type="text/javascript" src = "todo.js"></script>
 	</head>
 	<body>
-	<div id="container">
-	<div id="TopSpace"></div>
+	    <div id="container">
+	    <div id="TopSpace"></div>
 		<h1> Todo List </h1>
 		<div class="row">
 			<form id="form">
 				<input type="text" placeholder="Enter task... " id="input" value="Enter task..."> 
-				<input id="btn" onkeypress="newTask()" onclick="newTask()" type="button" value="Add Item">
+				<input id="btn" onkeypress="newTaskOnKeyPress()" onclick="newTaskOnClick()" type="button" value="Add Item">
 			</form>
 		</div>
 		<div id="output">
