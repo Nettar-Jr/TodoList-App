@@ -1,0 +1,101 @@
+
+*{
+	box-sizing: border-box;
+	margin: 0;
+}
+
+body{
+	background:url('wp.jpg');
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	min-height: 100hv;
+	margin:0;
+}
+
+#TopSpace{
+	height: 10vh
+}
+
+#container{
+	min-height: 100vh;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+h1{
+	text-align: center;
+	border-style: none;
+	color: white;
+}
+
+#form{
+	height: 4vh;
+	width: 55%;
+	margin: auto;
+}
+
+#input{
+	padding: 0 10px;
+	height: 100%;
+	width: 85%;
+	border-style: none;
+	float: left;
+}
+
+#btn{
+	height:100%;
+	border: 1px solid royalblue;
+	background-color: royalblue;
+	float: left;
+} 
+
+#list{
+	position: relative;
+	list-style: none;
+	width: 55%;
+	padding: 0;
+	margin: auto;
+}
+
+li {
+	margin-top: 10px;
+	border-bottom: 1px solid white;
+	color: white;
+	width: 95%;
+	height: 4vh;
+	transition: 0.3s;
+}
+
+li:hover{
+	background-color: rgba(0, 0, 0, 0.3);
+}
+
+ul li.checked {
+  background: #888;
+  color: #fff;
+  text-decoration: line-through;
+}
+
+
+
+.Remove{
+	float: right;
+	color: white;
+	background-color: blue;
+	width: 1.9vw;
+	height: 3.5vh;
+	text-align: center;
+	position: relative;
+	transition: 0.2s;
+	cursor: pointer;
+}
+
+.Remove:hover {
+	background-color: lightblue;
+}
+
+.check {
+	width: 2vw;
+	height: 2.5vh;
+	position: relative;	
+}
