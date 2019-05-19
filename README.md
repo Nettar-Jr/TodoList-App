@@ -1,7 +1,7 @@
-# TodoList-App
+# TodoList-Application
 
 *DESCRIPTION*
-A todo application that enable you to Add, check and uncheck, delete, edit task, save to local sotrage and add sub task.
+A todo application that enables you to Add, check and uncheck, delete, edit task, save to local sotrage and add sub task.
 
 *PRESENT FEATURES INCLUDES*
 1. Adding of task
