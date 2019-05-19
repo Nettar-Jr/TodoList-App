@@ -28,23 +28,23 @@ function newTaskOnClick (){
 
 	// if input is blank the if statement will ask user to input task
 
-		if (inputValue === ''){
-			alert ('please enter a task');
+	if (inputValue === ''){
+		alert ('please enter a task');
+	}
+	else {
+		todoList.appendChild(todoItem);
+
+
+		//give unique id to each list item.
+
+		var grabList = document.querySelectorAll('li');
+		for (var i = 0; i < grabList.length; i++){
+			var grabLi = grabList[i];
 		}
-		else {
-			todoList.appendChild(todoItem);
-
-
-			//give unique id to each list item.
-
-			var grabList = document.querySelectorAll('li');
-			for (var i = 0; i < grabList.length; i++){
-				var grabLi = grabList[i];
-			}
-			grabLi.id = 'item' + i;
-		}
-		document.getElementById('input').value;
-		storeItems();
+		grabLi.id = 'item' + i;
+	}
+	document.getElementById('input').value;
+	storeItems();
 	 
 		
 	// hide list when delete button is clicked
