@@ -69,27 +69,10 @@ function newTaskOnClick (){
 		}
 	}
 
-	// save list to system local storage
-	var storedIitems;
-	function storeItems(){
-		storedIitems = localStorage.setItem("task", list.innerHTML)
-	}
-
-	//get list from local storage
-	function getItems(){
-		storedIitems = JSON.parse(localStorage.getItem("task"));
-		if (!list){
-			list = [];
-		}
-		else{
-		
-		list.innerHTML = storedIitems;
-		} 
-	}
-	//getItems();
-
 	//double click item to add nested list
-	
+	todoItem.ondbclick = function subList(){
+		
+	}
 
 	// click to edit your task
 	todoItem.onclick = function editItem(){
