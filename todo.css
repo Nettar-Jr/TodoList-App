@@ -59,6 +59,7 @@ h1{
 }
 
 li {
+	/* position: absolute; */
 	margin-top: 10px;
 	border-bottom: 1px solid white;
 	color: white;
@@ -71,7 +72,7 @@ li {
 
 @keyframes fadeIn{
     from{color: rgba(128, 128, 128, 0.055);}
-    t0{color: whitesmoke;}
+    to{color: whitesmoke;}
 }
 
 li:hover{
@@ -100,5 +101,32 @@ li:hover{
 .check {
 	width: 2vw;
 	height: 2.5vh;
-	position: relative;	
+	position: relative;
+}
+.nestedList{
+	display: inline;
+	position: relative;
+	float: right;
+	list-style: none;
+	width: 90%;
+	padding: 0;
+    /*margin-left: ;*/
+}
+
+.subInput {
+	float: left;
+	margin-top: 5px;
+	width: 90%;
+	height: 4vh;
+	padding: 0px 5px 0px 5px;
+}
+.addSubList {
+	margin-top: 5px;
+	float: right;
+	text-align: center;
+	padding: 7px;
+	background-color: royalblue;
+	width: 7%;
+	height: 4vh;
+	float: left;
 }

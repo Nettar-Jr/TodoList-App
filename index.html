@@ -7,18 +7,18 @@
 		<script type="text/javascript" src = "todo.js"></script>
 	</head>
 	<body>
-	    <div id="container">
-	    <div id="TopSpace"></div>
-		<h1> Todo List </h1>
-		<div class="row">
-			<form id="form">
-				<input type="text" placeholder="Enter task... " id="input" value="Enter task..."> 
-				<input id="btn" onkeypress="newTaskOnKeyPress()" onclick="newTaskOnClick()" type="button" value="Add Item">
-			</form>
+	  <div id="container">
+			<div id="TopSpace"></div>
+			<h1> Todo List </h1>
+			<div class="row">
+				<form id="form">
+					<input type="text" placeholder="Enter task... " id="input" value="Enter task..."> 
+					<input id="btn" onkeypress="newTaskOnKeyPress()" onclick="newTaskOnClick()" type="button" value="Add Item">
+				</form>
+			</div>
+			<div id="output">
+					<ul id="list"></ul>
+			</div>
 		</div>
-		<div id="output">
-			<ul id="list"></ul>
-		</div>
-	</div>
 	</body>
 </html>

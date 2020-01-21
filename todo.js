@@ -44,21 +44,16 @@ function newTaskOnClick (){
 			grabLi.id = 'item' + i;
 		}
 		document.getElementById('input').value;
-		storeItems();
+		
 	 
 		
-	// hide list when delete button is clicked
+	// remove list when delete button is clicked
 	deleteButton.onclick = function(event){
 		event.stopPropagation();
 		todoItem.parentNode.removeChild(todoItem);	
-		
-		storeItems();
 	}
-		 
-
-	//checked box create line-through effect on list.
-	checkBox.ondblclick = function(event){event.stopPropagation();} // this stops the checkbox from perfprming and action on double click.
 	
+	// click checkbox for strike through text.
 	checkBox.onclick = function(event){
 		event.stopPropagation();
 		if (todoItem.style.textDecoration === "line-through"){
@@ -70,18 +65,49 @@ function newTaskOnClick (){
 	}
 
 	//double click item to add nested list
-	todoItem.ondbclick = function subList(){
+	todoItem.ondblclick = function addSubTask(event){
+		event.stopPropagation();
+		var nestedList = document.createElement ("ul");  //create an unorganise list and append to an item (each item)
+		nestedList.className = "nestedList";
+		var subInput = document.createElement("input");  // create and input field
+		subInput.className = "subInput";
+
+		var addSubTaskBtn = document.createElement ("span"); //create a button and append to the input
+		addSubTaskBtn.innerText = "+";
+		addSubTaskBtn.className = "addSubList"
+		var subTaskDiv = document.createElement("div"); //create a div container, append the input and span
+		subTaskDiv.className = "subDiv";
+
+		subTaskDiv.appendChild(subInput);
+		subTaskDiv.appendChild(addSubTaskBtn);
+		todoItem.appendChild(subTaskDiv);
+
+		addSubTaskBtn.onclick = function addNestedList (event){
+			event.stopPropagation();
+			var textContent = subInput.value;
+			var nestedLi =document.createElement ("li");
+			var txt = document.createTextNode(textContent);
+			nestedLi.appendChild(txt);
 		
+			if (textContent === ''){
+				alert ('please enter a subtask');
+			}
+			else{
+				subTaskDiv.parentNode.removeChild(subTaskDiv);
+
+				var container = document.createElement("div");
+				container.className = "NestedListContainer";
+				todoItem.insertAdjacentElement("beforeend", container);
+
+				container.appendChild(nestedList);
+				nestedList.appendChild(nestedLi);
+			}
+
+			//click to remove nested list
+			nestedLi.onclick = function (){
+				nestedLi.parentNode.removeChild(nestedLi);
+			}
+			
+		}
 	}
-
-	// click to edit your task
-	todoItem.onclick = function editItem(){
-
-		var itemEdit = document.createElement("input");
-		itemEdit.type = "text";
-
-		todoItem.textContent = (itemEdit.value);
-
-	}
-	
 }
