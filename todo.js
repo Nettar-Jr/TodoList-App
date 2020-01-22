@@ -1,15 +1,18 @@
 
-//click add to create items and append to list
+//click additem to create items and append to list
 
 function newTaskOnClick (){
 
-	//create item, delete button and checkbox
+	//create item, delete button and checkbox 
 
 	var todoList = document.getElementById('list');
 
 	var todoItem = document.createElement('li');   
 	var deleteButton = document.createElement('span');
 	var checkBox = document.createElement('input'); 
+
+	var nestedList = document.createElement ("ul");  //create an unorganise list
+	nestedList.className = "nestedList";			// this will be appended to "todoItem" later
 
 	checkBox.className = "check";
 	checkBox.type = "checkbox";
@@ -28,22 +31,22 @@ function newTaskOnClick (){
 
 	// if input is blank the if statement will ask user to input task
 
-		if (inputValue === ''){
-			alert ('please enter a task');
+	if (inputValue === ''){
+		alert ('please enter a task');
+	}
+	else {
+		todoList.appendChild(todoItem);
+
+
+		//give unique id to each list item.
+
+		var grabList = document.querySelectorAll('li');
+		for (var i = 0; i < grabList.length; i++){
+			var grabLi = grabList[i];
 		}
-		else {
-			todoList.appendChild(todoItem);
-
-
-			//give unique id to each list item.
-
-			var grabList = document.querySelectorAll('li');
-			for (var i = 0; i < grabList.length; i++){
-				var grabLi = grabList[i];
-			}
-			grabLi.id = 'item' + i;
-		}
-		document.getElementById('input').value;
+		grabLi.id = 'item' + i;
+	}
+	document.getElementById('input').value;
 		
 	 
 		
@@ -67,14 +70,13 @@ function newTaskOnClick (){
 	//double click item to add nested list
 	todoItem.ondblclick = function addSubTask(event){
 		event.stopPropagation();
-		var nestedList = document.createElement ("ul");  //create an unorganise list and append to an item (each item)
-		nestedList.className = "nestedList";
+		
 		var subInput = document.createElement("input");  // create and input field
 		subInput.className = "subInput";
 
 		var addSubTaskBtn = document.createElement ("span"); //create a button and append to the input
 		addSubTaskBtn.innerText = "+";
-		addSubTaskBtn.className = "addSubList"
+		addSubTaskBtn.className = "addSubListBtn"
 		var subTaskDiv = document.createElement("div"); //create a div container, append the input and span
 		subTaskDiv.className = "subDiv";
 
@@ -87,27 +89,30 @@ function newTaskOnClick (){
 			var textContent = subInput.value;
 			var nestedLi =document.createElement ("li");
 			var txt = document.createTextNode(textContent);
+
+			var nestedLiDelBtn = document.createElement("span")
+			nestedLiDelBtn.innerText = "x";
+			nestedLiDelBtn.className = "Remove";
 			nestedLi.appendChild(txt);
+			nestedLi.appendChild(nestedLiDelBtn);
 		
 			if (textContent === ''){
 				alert ('please enter a subtask');
 			}
 			else{
 				subTaskDiv.parentNode.removeChild(subTaskDiv);
-
-				var container = document.createElement("div");
-				container.className = "NestedListContainer";
-				todoItem.insertAdjacentElement("beforeend", container);
-
-				container.appendChild(nestedList);
+				
+				todoItem.appendChild(nestedList);
 				nestedList.appendChild(nestedLi);
 			}
 
 			//click to remove nested list
-			nestedLi.onclick = function (){
+			nestedLiDelBtn.onclick = function (){
 				nestedLi.parentNode.removeChild(nestedLi);
 			}
 			
 		}
 	}
+
+	
 }
