@@ -11,6 +11,8 @@ function newTaskOnClick (){
 	var deleteButton = document.createElement('span');
 	var checkBox = document.createElement('input'); 
 
+	const todoArray = []  // This is where we will be storing our toddoitmes in other to not loose them when we close the browser
+
 	var nestedList = document.createElement ("ul");  //create an unorganise list
 	nestedList.className = "nestedList";			// this will be appended to "todoItem" later
 
@@ -45,6 +47,9 @@ function newTaskOnClick (){
 			var grabLi = grabList[i];
 		}
 		grabLi.id = 'item' + i;
+
+		localStorage.setItem('grabLi.id', JSON.stringify(todoAray));
+		var data = JSON.parse(localStorage.getItem("grabLi.id"))
 	}
 	document.getElementById('input').value;
 		
