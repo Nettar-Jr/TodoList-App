@@ -1,123 +1,149 @@
+let todoList = JSON.parse(localStorage.getItem('grabLi.id'));
+
+if (!todoList) {
+	todoList = [];
+}
+
+function lineThrough(todoItemDom,  storedTodo) {
+	if (storedTodo.checked){
+		todoItemDom.style.textDecoration = "line-through";
+	}
+	else {
+		todoItemDom.style.textDecoration = "none";
+	}
+}
+
+function handleDeleteClick(event, todoItem, todoItemState){
+	event.stopPropagation();
+
+	const index = todoList.findIndex(todo => todo.id === todoItemState.id)
+
+	todoList.splice(index, 1);
+	localStorage.setItem('grabLi.id',  JSON.stringify(todoList));
+	todoItem.parentNode.removeChild(todoItem);	
+}
+
+function handleCheckboxClick(event, todoItemState, todoItem) {
+	event.stopPropagation();
+	const index = todoList.findIndex(item => item.id === todoItemState.id);
+	const storedTodo = todoList[index];
+	
+	if(storedTodo.checked === true) {
+		storedTodo.checked = false;
+	} else {
+		storedTodo.checked = true;
+	}
+	lineThrough(todoItem, storedTodo);
+
+		todoList[index] = storedTodo;
+		event.target.checked = storedTodo.checked || null
+		localStorage.setItem('grabLi.id', JSON.stringify(todoList))
+	}
 
 //click additem to create items and append to list
+function createTodoItem(todoItemState) { 
+	const unorderedList = document.getElementById('list');
 
-function newTaskOnClick (){
-
-	//create item, delete button and checkbox 
-
-	var todoList = document.getElementById('list');
-
-	var todoItem = document.createElement('li');   
-	var deleteButton = document.createElement('span');
-	var checkBox = document.createElement('input'); 
-
-	const todoArray = []  // This is where we will be storing our toddoitmes in other to not loose them when we close the browser
-
-	var nestedList = document.createElement ("ul");  //create an unorganise list
-	nestedList.className = "nestedList";			// this will be appended to "todoItem" later
-
-	checkBox.className = "check";
-	checkBox.type = "checkbox";
-	deleteButton.innerText = "x";
-	deleteButton.className = "Remove";
-
-
-	//append and insert text node, delete button  and check box
-
-	var inputValue = document.getElementById('input').value;
-	var txt = document.createTextNode(inputValue);
+	const todoItem = document.createElement('li');   
+	const deleteButton = document.createElement('span');
+	const checkBox = document.createElement('input');
+	
+	const txt = document.createTextNode(todoItemState.textContent);
 	todoItem.appendChild(txt);
 	todoItem.appendChild(deleteButton);
 	todoItem.insertBefore(checkBox, txt);
-	 
+	todoItem.id = todoItemState.id;
+	
+			// click checkbox for strike through text.
+	checkBox.className = "check";
+	checkBox.type = "checkbox";
+	checkBox.checked = todoItemState.checked;
+	checkBox.onclick =  (event) => handleCheckboxClick(event, todoItemState, todoItem);
 
+	lineThrough(todoItem, todoItemState);
+
+	// remove list when delete button is clicked
+	deleteButton.innerText = "x";
+	deleteButton.className = "Remove";
+	deleteButton.onclick = (event) => handleDeleteClick(event, todoItem, todoItemState);
+
+	unorderedList.appendChild(todoItem);
+}
+
+
+function populateExisingList() {
+	for (let i = 0; i < todoList.length; i++) { 
+		createTodoItem(todoList[i]);
+	}
+}
+
+function newTaskOnClick (){
+	const inputValue = document.getElementById('input').value;
 	// if input is blank the if statement will ask user to input task
 
 	if (inputValue === ''){
 		alert ('please enter a task');
 	}
 	else {
-		todoList.appendChild(todoItem);
-
-
-		//give unique id to each list item.
-
-		var grabList = document.querySelectorAll('li');
-		for (var i = 0; i < grabList.length; i++){
-			var grabLi = grabList[i];
+		const length = todoList.length;
+		const itemId = length === 0 ?  0  :  todoList[length - 1].id + 1; 
+		const todoItem = {
+			id: itemId,
+			textContent: inputValue,
+			checked: false,
 		}
-		grabLi.id = 'item' + i;
+		todoList.push(todoItem);
+		createTodoItem(todoItem)
 
-		localStorage.setItem('grabLi.id', JSON.stringify(todoAray));
-		var data = JSON.parse(localStorage.getItem("grabLi.id"))
-	}
-	document.getElementById('input').value;
-		
-	 
-		
-	// remove list when delete button is clicked
-	deleteButton.onclick = function(event){
-		event.stopPropagation();
-		todoItem.parentNode.removeChild(todoItem);	
-	}
-	
-	// click checkbox for strike through text.
-	checkBox.onclick = function(event){
-		event.stopPropagation();
-		if (todoItem.style.textDecoration === "line-through"){
-			todoItem.style.textDecoration = "none";
-		}
-		else {
-			todoItem.style.textDecoration = "line-through";
-		}
+		localStorage.setItem('grabLi.id', JSON.stringify(todoList));
 	}
 
 	//double click item to add nested list
-	todoItem.ondblclick = function addSubTask(event){
-		event.stopPropagation();
+	// todoItem.ondblclick = function addSubTask(event){
+	// 	event.stopPropagation();
 		
-		var subInput = document.createElement("input");  // create and input field
-		subInput.className = "subInput";
+	// 	var subInput = document.createElement("input");  // create and input field
+	// 	subInput.className = "subInput";
 
-		var addSubTaskBtn = document.createElement ("span"); //create a button and append to the input
-		addSubTaskBtn.innerText = "+";
-		addSubTaskBtn.className = "addSubListBtn"
-		var subTaskDiv = document.createElement("div"); //create a div container, append the input and span
-		subTaskDiv.className = "subDiv";
+	// 	var addSubTaskBtn = document.createElement ("span"); //create a button and append to the input
+	// 	addSubTaskBtn.innerText = "+";
+	// 	addSubTaskBtn.className = "addSubListBtn"
+	// 	var subTaskDiv = document.createElement("div"); //create a div container, append the input and span
+	// 	subTaskDiv.className = "subDiv";
 
-		subTaskDiv.appendChild(subInput);
-		subTaskDiv.appendChild(addSubTaskBtn);
-		todoItem.appendChild(subTaskDiv);
+	// 	subTaskDiv.appendChild(subInput);
+	// 	subTaskDiv.appendChild(addSubTaskBtn);
+	// 	todoItem.appendChild(subTaskDiv);
 
-		addSubTaskBtn.onclick = function addNestedList (event){
-			event.stopPropagation();
-			var textContent = subInput.value;
-			var nestedLi =document.createElement ("li");
-			var txt = document.createTextNode(textContent);
+	// 	addSubTaskBtn.onclick = function addNestedList (event){
+	// 		event.stopPropagation();
+	// 		var textContent = subInput.value;
+	// 		var nestedLi =document.createElement ("li");
+	// 		var txt = document.createTextNode(textContent);
 
-			var nestedLiDelBtn = document.createElement("span")
-			nestedLiDelBtn.innerText = "x";
-			nestedLiDelBtn.className = "Remove";
-			nestedLi.appendChild(txt);
-			nestedLi.appendChild(nestedLiDelBtn);
+	// 		var nestedLiDelBtn = document.createElement("span")
+	// 		nestedLiDelBtn.innerText = "x";
+	// 		nestedLiDelBtn.className = "Remove";
+	// 		nestedLi.appendChild(txt);
+	// 		nestedLi.appendChild(nestedLiDelBtn);
 		
-			if (textContent === ''){
-				alert ('please enter a subtask');
-			}
-			else{
-				subTaskDiv.parentNode.removeChild(subTaskDiv);
+	// 		if (textContent === ''){
+	// 			alert ('please enter a subtask');
+	// 		}
+	// 		else{
+	// 			subTaskDiv.parentNode.removeChild(subTaskDiv);
 				
-				todoItem.appendChild(nestedList);
-				nestedList.appendChild(nestedLi);
-			}
+	// 			todoItem.appendChild(nestedList);
+	// 			nestedList.appendChild(nestedLi);
+	// 		}
 
-			//click to remove nested list
-			nestedLiDelBtn.onclick = function (){
-				nestedLi.parentNode.removeChild(nestedLi);
-			}
+	// 		//click to remove nested list
+	// 		nestedLiDelBtn.onclick = function (){
+	// 			nestedLi.parentNode.removeChild(nestedLi);
+	// 		}
 			
-		}
-	}
+	// 	}
+	// }
 
 	
 }
